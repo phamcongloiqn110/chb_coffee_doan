@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import './app_screens/home.dart';
-
-void main() => runApp(MaterialApp(
-    theme: ThemeData(fontFamily: 'Raleway'),
-    debugShowCheckedModeBanner: false,
-    home: Home(),
-  )
-);
+import 'widget/main_app.dart';
+//import './app_screens/HomePage.dart';
+void main() => runApp(MainApp());
