@@ -9,6 +9,9 @@ class OrderCard extends StatefulWidget {
 }
 
 class _OrderCardState extends State<OrderCard> {
+
+  int countNum = 1;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,25 +26,41 @@ class _OrderCardState extends State<OrderCard> {
                 border: Border.all(color: Color(0xFFD3D3D3), width: 2.0),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              width: 45.0,
+              width: 55.0,
               height: 73.0,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   children: <Widget>[
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        setState(() {
+                          if(countNum>98){
+                            countNum = 99;
+                          }else{
+                            countNum++;
+                          }
+                        });
+                      },
                       child: Icon(Icons.keyboard_arrow_up,
                       color: Color(0xFFD3D3D3)),
                     ),
                     Text(
-                      "1",
+                      '$countNum',
                       style: TextStyle(fontSize: 18.0, color: Colors.grey),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          if(countNum<2){
+                            countNum = 1;
+                          }else{
+                            countNum--;
+                          }
+                        });
+                      },
                       child: Icon(Icons.keyboard_arrow_down,
-                      color: Color(0xFFD3D3D3))
+                      color: Color(0xFFD3D3D3)),
                     )
                   ],
                 ),
@@ -96,7 +115,9 @@ class _OrderCardState extends State<OrderCard> {
            Padding(
              padding: EdgeInsets.only(top: 20.0),
              child: GestureDetector(
-               onTap: (){},
+               onTap: (){
+
+               },
                child: Icon(
                  Icons.cancel,
                  color: Colors.red,

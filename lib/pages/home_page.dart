@@ -83,18 +83,18 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(height: 20.0,),
           Column(
-            children: _drink.map(_buildFoodItem).toList(),
+            children: _drink.map(_buildDrinkItem).toList(),
           )
         ],
       ),
     );
   }
 
-  Widget _buildFoodItem(Drink drink){
+  Widget _buildDrinkItem(Drink drink){
     return GestureDetector(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => DrinkDetailsPage(),
+          builder: (BuildContext context) => DrinkDetailsPage(drink: drink),
         ));
       },
       child: Container(

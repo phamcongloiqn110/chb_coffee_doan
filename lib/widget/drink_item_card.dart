@@ -90,7 +90,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                           ),
                         ],
                       ),
-                      SmallButton(btnText: "Order"),
+                      SmallButton(btnText: "Order")
                     ],
                   ),
                 ),

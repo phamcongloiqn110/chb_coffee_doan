@@ -14,27 +14,30 @@ class _TablePageState extends State<TablePage> {
   final List<TableShop> _table = [];
 
   @override
-  void initState() {
+  initState() {
     super.initState();
-    DatabaseReference foodRef = FirebaseDatabase.instance.reference().child(
-        "table");
-    foodRef.once().then((DataSnapshot snapshot) {
-      var KEYS = snapshot.value.keys;
-      var DATA = snapshot.value;
+      FirebaseDatabase.instance.reference().child("table").onValue.listen((event) {
+        DataSnapshot snapshot = event.snapshot;
 
-      _table.clear();
+        var KEYS = snapshot.value.keys;
+        var DATA = snapshot.value;
 
-      for (var individualKey in KEYS) {
-        TableShop table = new TableShop(
-            name: DATA[individualKey]['name'],
-            isActive: DATA[individualKey]['isActive']
-        );
-        _table.add(table);
-      }
-      setState(() {
-        print('Length: $_table.length');
+        _table.clear();
+
+        for (var individualKey in KEYS) {
+          TableShop table = new TableShop(
+              name: DATA[individualKey]['name'],
+              isActive: DATA[individualKey]['isActive']
+          );
+          _table.add(table);
+        }
+
+        _table.sort((a,b)=>a.name.compareTo(b.name));
+
+        setState(() {
+          print('Length: $_table.length');
+        });
       });
-    });
   }
 
   @override

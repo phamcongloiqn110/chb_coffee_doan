@@ -65,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
         price: drink.price,
         sale: drink.sale
       ),
-
     );
   }
 }

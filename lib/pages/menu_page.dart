@@ -5,6 +5,8 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 
+import 'drink_detail_page.dart';
+
 class MenuPage extends StatefulWidget {
   @override
   _MenuPageState createState() => _MenuPageState();
@@ -72,14 +74,21 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Widget _buildFoodItem(Drink drink) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20.0),
-      child: DrinkItemCard(
-          image: drink.image,
-          name: drink.name,
-          description: drink.description,
-          price: drink.price,
-          sale: drink.sale
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) => DrinkDetailsPage(drink: drink),
+        ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 0.0),
+        child: DrinkItemCard(
+            image: drink.image,
+            name: drink.name,
+            description: drink.description,
+            price: drink.price,
+            sale: drink.sale
+        ),
       ),
     );
   }
