@@ -60,10 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       margin: EdgeInsets.only(bottom: 20.0),
       child: BoughtDrinks(
-        image: drink.image,
         name: drink.name,
+        image: drink.image,
         price: drink.price,
-        sale: drink.sale
+        sale: drink.sale,
       ),
     );
   }

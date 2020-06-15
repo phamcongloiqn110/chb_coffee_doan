@@ -1,15 +1,61 @@
-import '../model/ListDrinks.dart';
-
 class Drink{
-  final String description;
-  final String image;
-  final bool isActive;
-  final bool isSale;
-  final ListFood keyList;
-  final String name;
-  final String price;
-  final String sale;
+  String _id;
+  String _name;
+  String _description;
+  String _image;
+  bool _isActive;
+  bool _isSale;
+  double _price;
+  int _sale;
 
-  Drink({this.description, this.image, this.isActive, this.isSale, this.keyList,
-      this.name, this.price, this.sale});
+  Drink(this._id, this._name, this._description, this._image, this._isActive,
+      this._isSale, this._price, this._sale);
+
+  int get sale => _sale;
+
+  set sale(int value) {
+    _sale = value;
+  }
+
+  double get price => _price;
+
+  set price(double value) {
+    _price = value;
+  }
+
+  bool get isSale => _isSale;
+
+  set isSale(bool value) {
+    _isSale = value;
+  }
+
+  bool get isActive => _isActive;
+
+  set isActive(bool value) {
+    _isActive = value;
+  }
+
+  String get image => _image;
+
+  set image(String value) {
+    _image = value;
+  }
+
+  String get description => _description;
+
+  set description(String value) {
+    _description = value;
+  }
+
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
+  }
+
+  String get id => _id;
+
+  set id(String value) {
+    _id = value;
+  }
 }

@@ -7,8 +7,8 @@ class DrinkItemCard extends StatefulWidget {
   final String image;
   final String name;
   final String description;
-  final String price;
-  final String sale;
+  final double price;
+  final int sale;
 
   DrinkItemCard({this.image, this.name, this.description, this.price, this.sale});
 
@@ -75,14 +75,14 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "\$"+widget.price,
+                            "\$"+widget.price.toString(),
                             style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
                           ),
                           Text(
-                            widget.sale+"%",
+                            widget.sale.toString()+"%",
                             style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,

@@ -4,8 +4,8 @@ class BoughtDrinks extends StatefulWidget {
 
   final String image;
   final String name;
-  final String price;
-  final String sale;
+  final double price;
+  final int sale;
   final String description;
 
   BoughtDrinks({this.image, this.name, this.price, this.sale, this.description});
@@ -35,8 +35,8 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.black,
-                      Colors.black12
+                      Color.fromRGBO(0, 0, 0, 100),
+                      Color.fromRGBO(0, 0, 0, 0)
                     ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter
@@ -66,7 +66,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "\$"+widget.price,
+                        "\$"+widget.price.toString(),
                         style: TextStyle(
                           color: Colors.orange,
                           fontSize: 15.0,
@@ -74,7 +74,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                         ),
                       ),
                       Text(
-                        widget.sale+"%",
+                        widget.sale.toString()+"%",
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 15.0

@@ -28,16 +28,15 @@ class _MenuPageState extends State<MenuPage> {
       _drink.clear();
 
       for (var individualKey in KEYS) {
-        Drink drink = new Drink(
-            description: DATA[individualKey]['description'],
-            image: DATA[individualKey]['image'],
-            isActive: DATA[individualKey]['isActive'],
-            isSale: DATA[individualKey]['isSale'],
-            keyList: DATA[individualKey]['keyList'],
-            name: DATA[individualKey]['name'],
-            price: DATA[individualKey]['price'],
-            sale: DATA[individualKey]['sale']
-        );
+        Drink drink = Drink(
+            individualKey,
+            DATA[individualKey]['name'],
+            DATA[individualKey]['description'],
+            DATA[individualKey]['image'],
+            (DATA[individualKey]['isActive']== 'true') ? true : false,
+            (DATA[individualKey]['isSale'] == 'true') ? true : false,
+            double.parse(DATA[individualKey]['price']),
+            int.parse(DATA[individualKey]['sale']));
         _drink.add(drink);
       }
       setState(() {

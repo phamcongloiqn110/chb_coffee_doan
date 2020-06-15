@@ -1,6 +1,6 @@
 class TableShop{
-  final String name;
-  final bool isActive;
+  String name;
+  bool isActive;
 
   TableShop({this.name, this.isActive});
 }
