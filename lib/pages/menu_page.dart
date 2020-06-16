@@ -1,4 +1,4 @@
-import 'package:bhccoffee/model/Drink.dart';
+import '../model/Drink.dart';
 
 import '../widget/drink_item_card.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,9 +19,9 @@ class _MenuPageState extends State<MenuPage> {
   @override
   void initState() {
     super.initState();
-    DatabaseReference foodRef = FirebaseDatabase.instance.reference().child(
-        "food");
-    foodRef.once().then((DataSnapshot snapshot) {
+    FirebaseDatabase.instance.reference().child("food").onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
+
       var KEYS = snapshot.value.keys;
       var DATA = snapshot.value;
 

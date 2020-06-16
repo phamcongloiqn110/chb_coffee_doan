@@ -1,7 +1,7 @@
 import '../model/Drink.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../widget/bought_drink.dart';
+import '../widget/frequently_bought_drink.dart';
 import '../widget/food_category.dart';
 import '../widget/search_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +21,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    DatabaseReference foodRef = FirebaseDatabase.instance.reference().child(
-        "food");
-    foodRef.once().then((DataSnapshot snapshot) {
+    FirebaseDatabase.instance.reference().child("food").onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
       var KEYS = snapshot.value.keys;
       var DATA = snapshot.value;
 

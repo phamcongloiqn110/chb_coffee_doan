@@ -1,4 +1,4 @@
-import '../widget/bought_drink.dart';
+import '../widget/frequently_bought_drink.dart';
 import '../widget/food_category.dart';
 import '../widget/search_field.dart';
 import '../model/Drink.dart';
