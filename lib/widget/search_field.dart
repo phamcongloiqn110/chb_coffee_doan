@@ -3,6 +3,7 @@ import 'package:bhccoffee/pages/drink_detail_search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import 'drink_item_card.dart';
 import 'notfound.dart';
 
 class SearchField extends StatefulWidget {
@@ -129,37 +130,47 @@ class DataSearch extends SearchDelegate<Drink> {
         ? []
         : drinks.where((target) => target.name.contains(query)).toList();
     return suggestion.isEmpty ? NotFound() : ListView.builder(
-      itemBuilder: (context, index) =>
-          ListTile(
-            onTap: () {
+      itemBuilder: (context, index) => Container(
+          margin: EdgeInsets.only(bottom: 0.0),
+          child: GestureDetector(
+            onTap: (){
               x =  index;
               showResults(context);
-
             },
-            leading: Icon(Icons.fastfood),
-            title: RichText(
-              text: TextSpan(
-                text: drinks[index].name.substring(0,query.length),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold
-                ),
-                children: [
-                  TextSpan(
-                    text: drinks[index].name.substring(query.length),
-                    style: TextStyle(color: Colors.grey)
-                  )
-                ]
-              ),
+            child: DrinkItemCard(
+                image: drinks[index].image,
+                name: drinks[index].name,
+                description: drinks[index].description,
+                price: drinks[index].price,
+                sale: drinks[index].sale
             ),
-            trailing: Icon(Icons.find_replace),
           ),
-      itemCount: suggestion.length,
+      ),
+//          ListTile(
+//            onTap: () {
+//              x =  index;
+//              showResults(context);
+//            },
+//            leading: Icon(Icons.fastfood),
+//            title: RichText(
+//              text: TextSpan(
+//                text: drinks[index].name.substring(0,query.length),
+//                style: TextStyle(
+//                  color: Colors.black,
+//                  fontWeight: FontWeight.bold
+//                ),
+//                children: [
+//                  TextSpan(
+//                    text: drinks[index].name.substring(query.length),
+//                    style: TextStyle(color: Colors.grey)
+//                  )
+//                ]
+//              ),
+//            ),
+//            trailing: Icon(Icons.find_replace),
+//          ),
+//      itemCount: suggestion.length,
     );
   }
 }
-
-bool equalsIgnoreCase(String a, String b) =>
-    (a == null && b == null) ||
-        (a != null && b != null && a.toLowerCase() == b.toLowerCase());
 
