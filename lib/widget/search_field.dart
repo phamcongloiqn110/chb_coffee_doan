@@ -146,30 +146,6 @@ class DataSearch extends SearchDelegate<Drink> {
             ),
           ),
       ),
-//          ListTile(
-//            onTap: () {
-//              x =  index;
-//              showResults(context);
-//            },
-//            leading: Icon(Icons.fastfood),
-//            title: RichText(
-//              text: TextSpan(
-//                text: drinks[index].name.substring(0,query.length),
-//                style: TextStyle(
-//                  color: Colors.black,
-//                  fontWeight: FontWeight.bold
-//                ),
-//                children: [
-//                  TextSpan(
-//                    text: drinks[index].name.substring(query.length),
-//                    style: TextStyle(color: Colors.grey)
-//                  )
-//                ]
-//              ),
-//            ),
-//            trailing: Icon(Icons.find_replace),
-//          ),
-//      itemCount: suggestion.length,
     );
   }
 }
