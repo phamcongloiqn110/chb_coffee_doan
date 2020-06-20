@@ -1,11 +1,9 @@
 import 'package:bhccoffee/model/Drink.dart';
-import 'package:bhccoffee/pages/drink_detail_page.dart';
+import 'package:bhccoffee/pages/drink_detail_search.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-import 'drink_item_card.dart';
-
+import 'notfound.dart';
 
 class SearchField extends StatefulWidget {
   @override
@@ -14,60 +12,35 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
 
-  final List<Item> _drink = [];
-  Item item;
-
-  DatabaseReference itemRef;
-  TextEditingController controller = new TextEditingController();
-  String searchString;
-
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final List<Drink> _drink = [];
 
   @override
   void initState() {
     super.initState();
-    item = Item(null, null, null, null, null);
+    FirebaseDatabase.instance.reference().child("food").onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
 
-    FirebaseDatabase database = FirebaseDatabase.instance;
-    itemRef = database.reference().child("food");
-    itemRef.onChildAdded.listen(_onEntryAdded);
-    itemRef.onChildChanged.listen(_onEntryChanged);
-    controller.addListener(() {
+      var KEYS = snapshot.value.keys;
+      var DATA = snapshot.value;
+
+      _drink.clear();
+
+      for (var individualKey in KEYS) {
+        Drink drink = Drink(
+            individualKey,
+            DATA[individualKey]['name'],
+            DATA[individualKey]['description'],
+            DATA[individualKey]['image'],
+            (DATA[individualKey]['isActive']== 'true') ? true : false,
+            (DATA[individualKey]['isSale'] == 'true') ? true : false,
+            double.parse(DATA[individualKey]['price']),
+            int.parse(DATA[individualKey]['sale']));
+        _drink.add(drink);
+      }
       setState(() {
-        searchString = controller.text;
+        print('Length: $_drink.length');
       });
     });
-  }
-
-  _onEntryAdded(Event event){
-    setState(() {
-      _drink.add(Item.fromSnapshot(event.snapshot));
-    });
-  }
-
-  _onEntryChanged(Event event){
-    var old = _drink.singleWhere((element){
-      return element.key == event.snapshot.key;
-    });
-    setState(() {
-      _drink[_drink.indexOf(old)] = Item.fromSnapshot(event.snapshot);
-    });
-  }
-
-  void handleSubmit(){
-    final FormState formState = formKey.currentState;
-
-    if(formState.validate()){
-      formState.save();
-      formState.reset();
-      itemRef.push().set(item.toJson());
-    }
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -79,7 +52,7 @@ class _SearchFieldState extends State<SearchField> {
         child: TextField(
           readOnly: true,
           onTap: (){
-            showSearch(context: context, delegate: DataSearch());
+            showSearch(context: context, delegate: DataSearch(this._drink));
           },
           decoration: InputDecoration(
             filled: true,
@@ -101,7 +74,7 @@ class _SearchFieldState extends State<SearchField> {
                 icon: Icon(Icons.search),
                 color: Colors.grey,
                 onPressed: (){
-                  showSearch(context: context, delegate: DataSearch());
+                  showSearch(context: context, delegate: DataSearch(this._drink));
                 },
               ),
             ),
@@ -113,48 +86,13 @@ class _SearchFieldState extends State<SearchField> {
   }
 }
 
-class Item {
-  String key;
-  String image;
-  String name;
-  String description;
-  double price;
-  int sale;
+class DataSearch extends SearchDelegate<Drink> {
+  List<Drink> drinks = [];
+  List<Drink> suggestion = [];
+  Drink drink;
+  var x;
 
-  Item(this.image, this.name, this.description, this.price, this.sale);
-
-  Item.fromSnapshot(DataSnapshot snapshot)
-      : key = snapshot.key,
-        image = snapshot.value["image"],
-        name = snapshot.value["name"],
-        description = snapshot.value["description"],
-        price = snapshot.value["price"],
-        sale = snapshot.value["sale"];
-
-
-  toJson() {
-    return {
-      "image": image,
-      "name": name,
-      "description": description,
-      "price": price,
-      "sale": sale,
-    };
-  }
-}
-
-class DataSearch extends SearchDelegate<String> {
-  final listDrink = [
-    "Milk Coffee",
-    "Black Coffee",
-    "Milk Tea",
-    "Cacao",
-    "Yogurt",
-    "Juice",
-    "Smoothie"
-  ];
-
-  final rencentDrink = ["Milk Coffee", "Black Coffee", "Milk Tea"];
+  DataSearch(this.drinks);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -171,61 +109,57 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: AnimatedIcon(
-        icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,
-      ),
-      onPressed: () {
-        close(context, null);
-      },
-    );
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          close(context, null);
+        });
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 100.0,
-        width: 100.0,
-        child: Card(
-          color: Colors.red,
-          child: Center(
-            child: Text(query),
-          ),
-        ),
-      ),
-    );
+    return DrinkDetailsSearch(drink: drinks[x]);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
-        ? rencentDrink
-        : listDrink.where((element) => element.startsWith(query)).toList();
-    return ListView.builder(
+    final suggestion = query.isEmpty
+        ? []
+        : drinks.where((target) => target.name.contains(query)).toList();
+    return suggestion.isEmpty ? NotFound() : ListView.builder(
       itemBuilder: (context, index) =>
           ListTile(
             onTap: () {
+              x =  index;
               showResults(context);
+
             },
             leading: Icon(Icons.fastfood),
-            title: RichText(text: TextSpan(
-                text: suggestionList[index].substring(0, query.length),
+            title: RichText(
+              text: TextSpan(
+                text: drinks[index].name.substring(0,query.length),
                 style: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
                 ),
-                children: [TextSpan(
-                    text: suggestionList[index].substring(query.length),
+                children: [
+                  TextSpan(
+                    text: drinks[index].name.substring(query.length),
                     style: TextStyle(color: Colors.grey)
-                ),
-                ] // children
-            ),
+                  )
+                ]
+              ),
             ),
             trailing: Icon(Icons.find_replace),
           ),
-      itemCount: suggestionList.length,
+      itemCount: suggestion.length,
     );
   }
 }
 
+bool equalsIgnoreCase(String a, String b) =>
+    (a == null && b == null) ||
+        (a != null && b != null && a.toLowerCase() == b.toLowerCase());
 

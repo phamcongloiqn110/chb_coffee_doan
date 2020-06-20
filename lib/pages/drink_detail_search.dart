@@ -2,17 +2,17 @@ import 'package:bhccoffee/model/Drink.dart';
 import 'package:flutter/material.dart';
 import '../widget/button.dart';
 
-class DrinkDetailsPage extends StatefulWidget {
+class DrinkDetailsSearch extends StatefulWidget {
 
   final Drink drink;
 
-  DrinkDetailsPage({this.drink});
+  DrinkDetailsSearch({this.drink});
 
   @override
-  _DrinkDetailsPageState createState() => _DrinkDetailsPageState();
+  _DrinkDetailsSearchState createState() => _DrinkDetailsSearchState();
 }
 
-class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
+class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
 
   var _mediumSpace = SizedBox(
     height: 20.0,
@@ -28,16 +28,6 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          title: Text(
-            "Food Details",
-            style: TextStyle(fontSize: 16.0, color: Colors.black),
-          ),
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          centerTitle: true,
-        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: Column(

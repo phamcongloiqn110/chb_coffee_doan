@@ -44,6 +44,8 @@ dependencies:
   firebase_database: ^3.1.5
   firebase_storage: ^3.1.5
 
+  fluttertoast: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +66,7 @@ flutter:
    - images/logocoffee.png
    - images/coffee-cup.png
    - images/coffee-list1.jpg
+   - images/oops.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
