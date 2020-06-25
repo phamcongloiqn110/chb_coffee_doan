@@ -47,40 +47,45 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
             Positioned(
               left: 10.0,
               bottom: 25.0,
-              right: 10.0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text(
-                        widget.name,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold
+                      Container(
+                        width: 230.0,
+                        child: Text(
+                          widget.name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        "\$"+widget.price.toString(),
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold
+                  Container(
+                    width: 170.0,
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "\$"+widget.price.toString(),
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold
+                          ),
                         ),
-                      ),
-                      Text(
-                        widget.sale.toString()+"%",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15.0
-                        ),
-                      )
-                    ],
+                        Text(
+                          widget.sale.toString()+"%",
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15.0
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),

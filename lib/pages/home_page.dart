@@ -66,17 +66,6 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold
                 ),
               ),
-              GestureDetector(
-                onTap: (){},
-                child: Text(
-                  "View all",
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.orangeAccent
-                  ),
-                ),
-              ),
             ],
           ),
           SizedBox(height: 20.0,),

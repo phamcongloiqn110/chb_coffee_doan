@@ -53,12 +53,6 @@ class _MainScreenState extends State<MainScreen> {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: _buildNotificationCart(),
-            onPressed: () {},
-          )
-        ],
       ),
       resizeToAvoidBottomPadding: false,
       bottomNavigationBar: BottomNavigationBar(
@@ -76,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
             title: Text("Home")
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.menu),
+              icon: Icon(Icons.book),
               title: Text("Menu")
           ),
           BottomNavigationBarItem(
@@ -90,36 +84,6 @@ class _MainScreenState extends State<MainScreen> {
         ]
       ),
       body: currentPage,
-    );
-  }
-
-  Widget _buildNotificationCart() {
-    return Stack(
-      children: <Widget>[
-        Icon(
-          Icons.notifications_none,
-           size: 30.0,
-          color: Theme
-              .of(context)
-              .primaryColor,
-        ),
-        Positioned(
-          top: 0.0,
-          right: 0.0,
-          child: Container(
-            height: 14.0,
-            width: 14.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: Colors.red,
-            ),
-            child: Center(
-              child: Text(
-                "1", style: TextStyle(fontSize: 12.0, color: Colors.white,),),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
