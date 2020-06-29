@@ -1,5 +1,8 @@
+import 'package:provider/provider.dart';
+
 import '../model/Drink.dart';
 
+import '../model/OrderDetail.dart';
 import '../widget/drink_item_card.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -47,28 +50,32 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Consumer<OrderDetail> (
+      builder: (context, OrderDetail, child){
+        return Scaffold(
+          body: ListView(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
             children: <Widget>[
-              Text(
-                "Coffee",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Coffee",
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(height: 10.0),
+              Column(
+                children: _drink.map(_buildFoodItem).toList(),
+              )
             ],
           ),
-          SizedBox(height: 10.0),
-          Column(
-            children: _drink.map(_buildFoodItem).toList(),
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 
@@ -76,18 +83,12 @@ class _MenuPageState extends State<MenuPage> {
     return GestureDetector(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => DrinkDetailsPage(drink: drink),
+          builder: (BuildContext context) => DrinkDetailsPage(drink),
         ));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 0.0),
-        child: DrinkItemCard(
-            image: drink.image,
-            name: drink.name,
-            description: drink.description,
-            price: drink.price,
-            sale: drink.sale
-        ),
+        child: DrinkItemCard(drink),
       ),
     );
   }

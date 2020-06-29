@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'model/OrderDetail.dart';
 import 'widget/main_app.dart';
-//import './app_screens/HomePage.dart';
-void main() => runApp(MainApp());
+void main() => runApp(
+  ChangeNotifierProvider(create: (context) => OrderDetail(),
+  child: MainApp(),)
+);

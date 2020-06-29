@@ -59,6 +59,12 @@ class Drink{
     _id = value;
   }
 
+  double totalDrink(){
+    if(isSale){
+      return price*sale/100;
+    }
+    return price;
+  }
 //  Drink.map(dynamic obj){
 //    this._id = obj['id'];
 //    this._name = obj['name'];

@@ -2,7 +2,9 @@ import 'package:bhccoffee/model/Drink.dart';
 import 'package:bhccoffee/pages/drink_detail_search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../model/OrderDetail.dart';
 import 'drink_item_card.dart';
 import 'notfound.dart';
 
@@ -46,43 +48,47 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20.0),
-      child: Material(
-        borderRadius: BorderRadius.circular(30.0),
-        child: TextField(
-          readOnly: true,
-          onTap: (){
-            showSearch(context: context, delegate: DataSearch(this._drink));
-          },
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Color.fromRGBO(0, 0, 0, 250),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
-            hintText: "Search any drink", hintStyle: TextStyle(color: Colors.grey),
-            suffixIcon: Material(
-              color: Color.fromRGBO(0,0,0,0),
-              borderRadius: BorderRadius.circular(30.0),
-              child: IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.grey,
-                onPressed: (){
-                  showSearch(context: context, delegate: DataSearch(this._drink));
-                },
+    return Consumer<OrderDetail>(
+      builder: (context, OrderDetail, child){
+        return Container(
+          margin: EdgeInsets.only(top: 20.0),
+          child: Material(
+            borderRadius: BorderRadius.circular(30.0),
+            child: TextField(
+              readOnly: true,
+              onTap: (){
+                showSearch(context: context, delegate: DataSearch(this._drink));
+              },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Color.fromRGBO(0, 0, 0, 250),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
+                hintText: "Search any drink", hintStyle: TextStyle(color: Colors.grey),
+                suffixIcon: Material(
+                  color: Color.fromRGBO(0,0,0,0),
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: IconButton(
+                    icon: Icon(Icons.search),
+                    color: Colors.grey,
+                    onPressed: (){
+                      showSearch(context: context, delegate: DataSearch(this._drink));
+                    },
+                  ),
+                ),
+                border: InputBorder.none,
               ),
             ),
-            border: InputBorder.none,
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 }
@@ -121,7 +127,7 @@ class DataSearch extends SearchDelegate<Drink> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return DrinkDetailsSearch(drink: drinks[x]);
+    return DrinkDetailsSearch(drinks[x]);
   }
 
   @override
@@ -129,24 +135,18 @@ class DataSearch extends SearchDelegate<Drink> {
     final suggestion = query.isEmpty
         ? []
         : drinks.where((target) => target.name.contains(query)).toList();
-    return suggestion.isEmpty ? NotFound() : ListView.builder(
-      itemBuilder: (context, index) => Container(
-          margin: EdgeInsets.only(bottom: 0.0),
-          child: GestureDetector(
-            onTap: (){
-              x =  index;
-              showResults(context);
-            },
-            child: DrinkItemCard(
-                image: drinks[index].image,
-                name: drinks[index].name,
-                description: drinks[index].description,
-                price: drinks[index].price,
-                sale: drinks[index].sale
+          return suggestion.isEmpty ? NotFound() : ListView.builder(
+          itemBuilder: (context, index) => Container(
+            margin: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: GestureDetector(
+              onTap: (){
+                x =  index;
+                showResults(context);
+              },
+              child: DrinkItemCard(drinks[index]),
             ),
           ),
-      ),
-    );
+        );
   }
 }
 
