@@ -6,6 +6,8 @@ import '../widget/notfound.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'table_page.dart';
+
 
 class OrderPage extends StatefulWidget {
   @override
@@ -248,8 +250,23 @@ class _OrderPageState extends State<OrderPage> {
                 height: 20.0,
               ),
               GestureDetector(
-                onTap: () {
-                },
+                onTap: OrderDetail.basketDrinkOrderDetail.length !=0 ? () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context){
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("Choose table", style: TextStyle(
+                            color: Colors.black
+                          ),),
+                          backgroundColor: Colors.white10,
+                          elevation: 0,
+                          centerTitle: true,
+                        ),
+                        body: TablePage(),
+                      );
+                    },
+                  ));
+                } : null,
                 child: Container(
                   height: 50.0,
                   decoration: BoxDecoration(
