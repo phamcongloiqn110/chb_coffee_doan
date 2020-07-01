@@ -20,11 +20,11 @@ class TableCard extends StatefulWidget {
 
 class _TableCardState extends State<TableCard> {
 
-  final DatabaseReference ordersDatabase =  FirebaseDatabase.instance.reference().child("orders");
+  final DatabaseReference Database =  FirebaseDatabase.instance.reference();
 
   sendData(List<DrinkOrderDetail> orderDetail, TableShop table){
     var detail = [];
-    var date = DateTime.now().toString();
+    var date = DateTime.now().millisecondsSinceEpoch;
     for( var i = 0 ; i < orderDetail.length ; i++){
       var vl = {
         'food' : orderDetail[i].drink.id,
@@ -34,24 +34,17 @@ class _TableCardState extends State<TableCard> {
 
       detail.add(vl);
     }
-    Fluttertoast.showToast(
-        msg: "Da toi day",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-    var orderKey = ordersDatabase.push();
-    orderKey.set({
+
+    var orderKey = Database.child("orders").push().key;
+    Database.child("orders").child(orderKey).set({
       'date'  : date,
       'detail': detail,
       'staff' : null
     });
 
-    FirebaseDatabase.instance.reference().child("table").child("name").update({
-      'orders': orderKey
+    var rs = Database.child("table").child(widget.table.id).child("order").push().key;
+    Database.child("table").child(widget.table.id).child("order").set({
+      rs : orderKey
     });
   }
 
@@ -115,6 +108,15 @@ class _TableCardState extends State<TableCard> {
                           child: FlatButton(
                               onPressed: (){
                                 sendData(OrderDetail.basketDrinkOrderDetail, widget.table);
+                                Fluttertoast.showToast(
+                                    msg: "Order successful",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
                               },
                               child: Container(
                                 height: 20.0,

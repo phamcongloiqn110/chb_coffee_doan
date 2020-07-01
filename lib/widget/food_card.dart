@@ -18,7 +18,7 @@ class FoodCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Image(
-                image: AssetImage("images/coffee-cup.png"),
+                image: AssetImage(image),
                 height: 65.0,
                 width: 65.0,
               ),

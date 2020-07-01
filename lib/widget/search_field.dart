@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/OrderDetail.dart';
-import 'drink_item_card.dart';
 import 'notfound.dart';
 
 class SearchField extends StatefulWidget {
@@ -15,7 +14,8 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
 
-  final List<Drink> _drink = [];
+  final List<dynamic> _drink = [];
+  final List<String> nameDrinks = [];
 
   @override
   void initState() {
@@ -27,6 +27,7 @@ class _SearchFieldState extends State<SearchField> {
       var DATA = snapshot.value;
 
       _drink.clear();
+      nameDrinks.clear();
 
       for (var individualKey in KEYS) {
         Drink drink = Drink(
@@ -38,6 +39,7 @@ class _SearchFieldState extends State<SearchField> {
             (DATA[individualKey]['isSale'] == 'true') ? true : false,
             double.parse(DATA[individualKey]['price']),
             int.parse(DATA[individualKey]['sale']));
+        nameDrinks.add(drink.name);
         _drink.add(drink);
       }
       setState(() {
@@ -57,7 +59,7 @@ class _SearchFieldState extends State<SearchField> {
             child: TextField(
               readOnly: true,
               onTap: (){
-                showSearch(context: context, delegate: DataSearch(this._drink));
+                showSearch(context: context, delegate: DataSearch(list: _drink, nameDrinks: nameDrinks));
               },
               decoration: InputDecoration(
                 filled: true,
@@ -79,7 +81,7 @@ class _SearchFieldState extends State<SearchField> {
                     icon: Icon(Icons.search),
                     color: Colors.grey,
                     onPressed: (){
-                      showSearch(context: context, delegate: DataSearch(this._drink));
+                      showSearch(context: context, delegate: DataSearch(list: _drink, nameDrinks: nameDrinks));
                     },
                   ),
                 ),
@@ -93,14 +95,10 @@ class _SearchFieldState extends State<SearchField> {
   }
 }
 
-class DataSearch extends SearchDelegate<Drink> {
-  List<Drink> drinks = [];
-  List<Drink> suggestion = [];
-  Drink drink;
-  var x;
-
-  DataSearch(this.drinks);
-
+class DataSearch extends SearchDelegate<String>{
+  List<dynamic> list;
+  List<String> nameDrinks;
+  DataSearch({this.list, this.nameDrinks});
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -108,8 +106,9 @@ class DataSearch extends SearchDelegate<Drink> {
         icon: Icon(Icons.clear),
         onPressed: () {
           query = "";
+          showSuggestions(context);
         },
-      )
+      ),
     ];
   }
 
@@ -127,26 +126,33 @@ class DataSearch extends SearchDelegate<Drink> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return DrinkDetailsSearch(drinks[x]);
+
+  var result;
+  for(var i = 0; i<list.length; i++){
+    if(list[i].name == query){
+      result = DrinkDetailsSearch(list[i]);
+    }
+  }
+  return result;
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestion = query.isEmpty
-        ? []
-        : drinks.where((target) => target.name.contains(query)).toList();
-          return suggestion.isEmpty ? NotFound() : ListView.builder(
-          itemBuilder: (context, index) => Container(
-            margin: EdgeInsets.only(left: 15.0, right: 15.0),
-            child: GestureDetector(
-              onTap: (){
-                x =  index;
-                showResults(context);
-              },
-              child: DrinkItemCard(drinks[index]),
-            ),
-          ),
-        );
+    var searchList = query.isEmpty ? nameDrinks : nameDrinks.where((p) => p.contains(query)).toList();
+    return searchList.isEmpty ? NotFound() : ListView.builder(
+      itemCount: searchList.length,
+      itemBuilder: (context, index) {
+         return ListTile(
+           leading: Icon(Icons.fastfood),
+           title: Text(searchList[index].toString()),
+           trailing: Icon(Icons.youtube_searched_for),
+           onTap: (){
+             query = searchList[index];
+             showResults(context);
+           },
+         );
+      });
   }
+
 }
 

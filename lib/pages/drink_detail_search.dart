@@ -1,5 +1,5 @@
-import 'package:bhccoffee/model/Drink.dart';
-import 'package:bhccoffee/model/DrinkOrderDetail.dart';
+import '../model/Drink.dart';
+import '../model/DrinkOrderDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -35,126 +35,150 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
         return Scaffold(
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(widget._drink.image),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(10.0)),
-                ),
-                _mediumSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      widget._drink.name,
-                      style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "\$" + widget._drink.price.toString(),
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Theme.of(context).primaryColor,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              padding: EdgeInsets.all(5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    height: 320.0,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(widget._drink.image),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(10.0)),
+                  ),
+                  _mediumSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        width: 300.0,
+                        child: Text(
+                          widget._drink.name,
+                          style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                _mediumSpace,
-                Text(
-                  "Description:",
-                  style: TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-                _smallSpace,
-                Text(
-                  widget._drink.description,
-                  textAlign: TextAlign.justify,
-                ),
-                _smallSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(icon: Icon(
-                        Icons.remove_circle),
-                        onPressed: (){
-                          setState(() {
-                            if(countNum<2){
-                              countNum = 1;
-                              Fluttertoast.showToast(
-                                  msg: "Invalid order quantity",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.grey,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                              );
-                            }else{
-                              countNum--;
-                            }
-                          });
-                        }),
-                    SizedBox(width: 15.0,),
-                    Text('$countNum', style: TextStyle(fontSize: 16.0,),),
-                    SizedBox(width: 15.0,),
-                    IconButton(icon: Icon(
-                        Icons.add_circle),
-                        onPressed: (){
-                          setState(() {
-                            if(countNum>98){
-                              countNum = 99;
-                              Fluttertoast.showToast(
-                                  msg: "Invalid order quantity",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.grey,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                              );
-                            }else{
-                              countNum++;
-                            }
-                          });
-                        }),
-                  ],
-                ),
-                _smallSpace,
-                Center(
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                      Text(
+                        "\$" + widget._drink.price.toString(),
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                      child: Container(
-                        constraints: const BoxConstraints(minWidth: 88.0, minHeight: 45.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Add to cart',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold
+                    ],
+                  ),
+                  _mediumSpace,
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      "Description:",
+                      style: TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  _smallSpace,
+                  Text(
+                    widget._drink.description,
+                    textAlign: TextAlign.justify,
+                  ),
+                  _smallSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(icon: Icon(
+                          Icons.remove_circle),
+                          onPressed: (){
+                            setState(() {
+                              if(countNum<2){
+                                countNum = 1;
+                                Fluttertoast.showToast(
+                                    msg: "Invalid order quantity",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
+                              }else{
+                                countNum--;
+                              }
+                            });
+                          }),
+                      SizedBox(width: 15.0,),
+                      Text('$countNum', style: TextStyle(fontSize: 16.0,),),
+                      SizedBox(width: 15.0,),
+                      IconButton(icon: Icon(
+                          Icons.add_circle),
+                          onPressed: (){
+                            setState(() {
+                              if(countNum>98){
+                                countNum = 99;
+                                Fluttertoast.showToast(
+                                    msg: "Invalid order quantity",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
+                              }else{
+                                countNum++;
+                              }
+                            });
+                          }),
+                    ],
+                  ),
+                  _smallSpace,
+                  Center(
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                      padding: const EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                        ),
+                        child: Container(
+                          constraints: const BoxConstraints(minWidth: 88.0, minHeight: 45.0), // min sizes for Material buttons
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Add to cart',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    onPressed: (){
-                      var isHaveDrink = 0;
-                      for(var i = 0; i<OrderDetail.count;i++){
-                        if(OrderDetail.basketDrinkOrderDetail[i].drink.id == widget._drink.id){
-                          OrderDetail.basketDrinkOrderDetail[i].quantity += int.parse('$countNum');
-                          OrderDetail.basketDrinkOrderDetail[i].priceAfterSale;
-                          OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
-                          isHaveDrink = 1;
+                      onPressed: (){
+                        var isHaveDrink = 0;
+                        for(var i = 0; i<OrderDetail.count;i++){
+                          if(OrderDetail.basketDrinkOrderDetail[i].drink.id == widget._drink.id){
+                            OrderDetail.basketDrinkOrderDetail[i].quantity += int.parse('$countNum');
+                            OrderDetail.basketDrinkOrderDetail[i].priceAfterSale;
+                            OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
+                            isHaveDrink = 1;
+                            Fluttertoast.showToast(
+                                msg: "Item added to cart",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.grey,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                            break;
+                          }
+                        }
+                        if(isHaveDrink == 0){
+                          OrderDetail.addDrink(new DrinkOrderDetail(widget._drink, int.parse('$countNum')));
                           Fluttertoast.showToast(
-                              msg: "Item added to cart",
+                              msg: "New item added to Cart",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
@@ -162,25 +186,12 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                               textColor: Colors.white,
                               fontSize: 16.0
                           );
-                          break;
                         }
-                      }
-                      if(isHaveDrink == 0){
-                        OrderDetail.addDrink(new DrinkOrderDetail(widget._drink, int.parse('$countNum')));
-                        Fluttertoast.showToast(
-                            msg: "New item added to Cart",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.grey,
-                            textColor: Colors.white,
-                            fontSize: 16.0
-                        );
-                      }
-                    },
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

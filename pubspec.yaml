@@ -65,8 +65,13 @@ flutter:
   assets:
    - images/logocoffee.png
    - images/coffee-cup.png
-   - images/coffee-list1.jpg
    - images/oops.png
+   - images/coldbrew.png
+   - images/fruit-tea.jpg
+   - images/macchiato.png
+   - images/ice-blended-coffee.jpg
+   - images/fruit-drink.jpg
+   - images/matcha.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

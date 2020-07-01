@@ -54,21 +54,8 @@ class _MenuPageState extends State<MenuPage> {
       builder: (context, OrderDetail, child){
         return Scaffold(
           body: ListView(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Coffee",
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10.0),
               Column(
                 children: _drink.map(_buildFoodItem).toList(),
               )
