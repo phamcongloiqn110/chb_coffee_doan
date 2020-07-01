@@ -1,5 +1,5 @@
-import 'package:bhccoffee/model/Drink.dart';
-import 'package:bhccoffee/pages/drink_detail_search.dart';
+import '../model/Drink.dart';
+import '../pages/drink_detail_search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

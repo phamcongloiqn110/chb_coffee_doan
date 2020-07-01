@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bhccoffee/model/DrinkOrderDetail.dart';
 import 'package:bhccoffee/model/OrderDetail.dart';
 import 'package:bhccoffee/model/Table.dart';
@@ -42,10 +44,31 @@ class _TableCardState extends State<TableCard> {
       'staff' : null
     });
 
-    var rs = Database.child("table").child(widget.table.id).child("order").push().key;
-    Database.child("table").child(widget.table.id).child("order").set({
-      rs : orderKey
+    var dbRef = Database.child("table").child(widget.table.id).child("order");
+    DatabaseReference newChildRef = dbRef.push();
+    var key = newChildRef.key;
+    dbRef.child(key).set(orderKey);
+  }
+
+  Timer _countdownTimer;
+
+  @override
+  void initState() {
+    _countdownTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+      if (mounted){
+        setState(() {
+
+        });
+      }
     });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _countdownTimer?.cancel();
+    _countdownTimer = null;
+    super.dispose();
   }
 
   @override
@@ -99,7 +122,7 @@ class _TableCardState extends State<TableCard> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Empty table"),
+                          child: Text("Empty "),
                         ),
                         SizedBox(height: 8.0,),
                         Container(
@@ -108,6 +131,8 @@ class _TableCardState extends State<TableCard> {
                           child: FlatButton(
                               onPressed: (){
                                 sendData(OrderDetail.basketDrinkOrderDetail, widget.table);
+                                OrderDetail.basketDrinkOrderDetail.clear();
+                                OrderDetail.totalPrice = 0.0;
                                 Fluttertoast.showToast(
                                     msg: "Order successful",
                                     toastLength: Toast.LENGTH_SHORT,

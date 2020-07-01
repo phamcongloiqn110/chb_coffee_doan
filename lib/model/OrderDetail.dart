@@ -31,6 +31,15 @@ class OrderDetail extends ChangeNotifier{
     return _price;
   }
 
+  set totalPrice(double value) {
+    _price = value;
+  }
+
+
+  set drinkOrderDetails(List<DrinkOrderDetail> value) {
+    _drinkOrderDetails = value;
+  }
+
   List<DrinkOrderDetail> get basketDrinkOrderDetail {
     return _drinkOrderDetails;
   }
@@ -40,6 +49,10 @@ class OrderDetail extends ChangeNotifier{
   }
 
   double tongGia(double value) {
+    _price = value;
+  }
+
+  set price(double value) {
     _price = value;
   }
 }

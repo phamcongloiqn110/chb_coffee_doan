@@ -1,4 +1,5 @@
 import 'package:bhccoffee/model/OrderDetail.dart';
+import 'package:bhccoffee/screens/main_screen.dart';
 import 'package:bhccoffee/widget/table_cart.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:provider/provider.dart';
@@ -47,14 +48,21 @@ class _TablePageState extends State<TablePage> {
   Widget build(BuildContext context) {
     return Consumer<OrderDetail>(
       builder: (context, OrderDetail, child){
-        return Scaffold(
-          body: ListView(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-            children: <Widget>[
-              Column(
-                children: _table.map(_buildTableItem).toList(),
-              )
-            ],
+        return WillPopScope(
+          onWillPop: (){
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => MainScreen(),
+            ));
+          },
+          child: Scaffold(
+            body: ListView(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+              children: <Widget>[
+                Column(
+                  children: _table.map(_buildTableItem).toList(),
+                )
+              ],
+            ),
           ),
         );
       },
