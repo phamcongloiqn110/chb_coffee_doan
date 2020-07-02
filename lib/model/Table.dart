@@ -2,9 +2,10 @@ class TableShop{
   String _id;
   String _name;
   bool _isActive;
+  Map<dynamic, dynamic> _listOrder = {};
 
 
-  TableShop(this._id, this._name, this._isActive);
+  TableShop(this._id, this._name, this._isActive, this._listOrder);
 
   bool get isActive => _isActive;
 
@@ -22,5 +23,11 @@ class TableShop{
 
   set id(String value) {
     _id = value;
+  }
+
+  Map<dynamic, dynamic> get listOrder => _listOrder;
+
+  set listOrder(Map<dynamic, dynamic> value) {
+    _listOrder = value;
   }
 }

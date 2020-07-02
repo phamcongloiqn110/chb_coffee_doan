@@ -10,17 +10,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 
-class TableCard extends StatefulWidget {
+class TableCardNew extends StatefulWidget {
 
   final TableShop table;
 
-  const TableCard({Key key, this.table}) : super(key: key);
+  const TableCardNew({Key key, this.table}) : super(key: key);
 
   @override
-  _TableCardState createState() => _TableCardState();
+  _TableCardNewState createState() => _TableCardNewState();
 }
 
-class _TableCardState extends State<TableCard> {
+class _TableCardNewState extends State<TableCardNew> {
 
   final DatabaseReference Database =  FirebaseDatabase.instance.reference();
 
@@ -122,7 +122,7 @@ class _TableCardState extends State<TableCard> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Empty "),
+                          child: Text("Bàn trống"),
                         ),
                         SizedBox(height: 8.0,),
                         Container(
@@ -130,18 +130,29 @@ class _TableCardState extends State<TableCard> {
                           width: 200.0,
                           child: FlatButton(
                               onPressed: (){
-                                sendData(OrderDetail.basketDrinkOrderDetail, widget.table);
-                                OrderDetail.basketDrinkOrderDetail.clear();
-                                OrderDetail.totalPrice = 0.0;
-                                Fluttertoast.showToast(
-                                    msg: "Order successful",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.grey,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );
+                                if(OrderDetail.basketDrinkOrderDetail.length == 0){
+                                  Fluttertoast.showToast(
+                                      msg: "Hãy chọn món trước",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                }else{
+                                  sendData(OrderDetail.basketDrinkOrderDetail, widget.table);
+                                  OrderDetail.basketDrinkOrderDetail.clear();
+                                  OrderDetail.totalPrice = 0.0;
+                                  Fluttertoast.showToast(
+                                      msg: "Đặt món thành công",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0
+                                  );
+                                }
                               },
                               child: Container(
                                 height: 20.0,
@@ -151,7 +162,7 @@ class _TableCardState extends State<TableCard> {
                                   borderRadius: BorderRadius.circular(35.0),
                                 ),
                                 child: Center(
-                                  child: Text("Click choose seat", style: TextStyle(
+                                  child: Text("Chọn chỗ ngồi", style: TextStyle(
                                     color: Color.fromRGBO(0, 0, 0, 260),
                                     fontSize: 14.0,),),
                                 ),

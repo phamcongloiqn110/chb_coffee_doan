@@ -9,7 +9,7 @@ class NotFound extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Image.asset("images/oops.png", width: 250, height: 250,),
-            Text("Oops, looks like the drinks isn't exist.",
+            Text("Rất tiếc, không tìm thấy sản phẩm nào",
               style: TextStyle(fontSize: 20.0),)
           ],
         ),

@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
             DATA[individualKey]['name'],
             DATA[individualKey]['description'],
             DATA[individualKey]['image'],
-            (DATA[individualKey]['isActive']== 'true') ? true : false,
-            (DATA[individualKey]['isSale'] == 'true') ? true : false,
+            DATA[individualKey]['isActive'],
+            DATA[individualKey]['isSale'],
             double.parse(DATA[individualKey]['price']),
             int.parse(DATA[individualKey]['sale']));
         _drink.add(drink);

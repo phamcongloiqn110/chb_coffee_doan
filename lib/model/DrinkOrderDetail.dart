@@ -20,10 +20,10 @@ class DrinkOrderDetail {
 
   DrinkOrderDetail(this._drink, this._quantity){
     if(_drink.isSale){
-      _priceAfterSale = (_drink.price *_quantity * _drink.sale)/100;
+      this._priceAfterSale = (_drink.price *_quantity * (100-_drink.sale))/100;
     }
     else
-      _priceAfterSale = _drink.price * _quantity;
+      this._priceAfterSale = _drink.price * _quantity;
   }
 
   set quantity(int value) {

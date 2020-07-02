@@ -60,10 +60,18 @@ class Drink{
   }
 
   double totalDrink(){
-    if(isSale){
+    if(this.isSale){
       return price*sale/100;
     }
     return price;
+  }
+
+  double priceSale(){
+    if(this.isSale){
+      return price * (100-sale)/100;
+    }
+    else
+      return price;
   }
 //  Drink.map(dynamic obj){
 //    this._id = obj['id'];

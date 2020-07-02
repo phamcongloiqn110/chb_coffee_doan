@@ -48,7 +48,7 @@ class _OrderPageState extends State<OrderPage> {
                                       setState(() {
                                         if(OrderDetail.basketDrinkOrderDetail[index].quantity>98){
                                           Fluttertoast.showToast(
-                                              msg: "Invalid order quantity",
+                                              msg: "Số lượng đặt không vượt quá 99",
                                               toastLength: Toast.LENGTH_SHORT,
                                               gravity: ToastGravity.BOTTOM,
                                               timeInSecForIosWeb: 1,
@@ -75,7 +75,7 @@ class _OrderPageState extends State<OrderPage> {
                                       setState(() {
                                         if(OrderDetail.basketDrinkOrderDetail[index].quantity<2){
                                           Fluttertoast.showToast(
-                                              msg: "Invalid order quantity",
+                                              msg: "Số lượng đặt không nhỏ hơn 1",
                                               toastLength: Toast.LENGTH_SHORT,
                                               gravity: ToastGravity.BOTTOM,
                                               timeInSecForIosWeb: 1,
@@ -131,19 +131,19 @@ class _OrderPageState extends State<OrderPage> {
                               SizedBox(height: 5.0),
                               SizedBox(height: 5.0),
                               Text(
-                                "Price: \$ "+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
+                                "Price: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
                                 style: TextStyle(
                                     fontSize: 16.0,
-                                    color: Colors.orangeAccent,
+                                    color: Colors.blueGrey,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                "Sale: "+ OrderDetail.basketDrinkOrderDetail[index].drink.sale.toString(),
+                                "Price sale: \$"+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w300),
+                                    color: Colors.lightBlue,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
@@ -179,14 +179,14 @@ class _OrderPageState extends State<OrderPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Subtotal",
+                    "Giá sản phẩm",
                     style: TextStyle(
                         color: Color(0xFF9BA7C6),
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "\$ ${OrderDetail.totalPrice}",
+                    "\$ ${OrderDetail.priceNotSale}",
                     style: TextStyle(
                         color: Color(0xFF9BA7C6),
                         fontSize: 16.0,
@@ -202,7 +202,7 @@ class _OrderPageState extends State<OrderPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Price after discount",
+                    "Giá sau khi giảm",
                     style: TextStyle(
                         color: Color(0xFF9BA7C6),
                         fontSize: 16.0,
@@ -231,7 +231,7 @@ class _OrderPageState extends State<OrderPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Cart Total",
+                    "Thành tiền",
                     style: TextStyle(
                         color: Color(0xFF9BA7C6),
                         fontSize: 16.0,
@@ -255,7 +255,7 @@ class _OrderPageState extends State<OrderPage> {
                     builder: (BuildContext context){
                       return Scaffold(
                         appBar: AppBar(
-                          title: Text("Choose table", style: TextStyle(
+                          title: Text("Chọn bàn", style: TextStyle(
                             color: Colors.black
                           ),),
                           backgroundColor: Colors.white10,
@@ -275,7 +275,7 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   child: Center(
                     child: Text(
-                      "Proceed to Order",
+                      "Đặt chỗ",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,

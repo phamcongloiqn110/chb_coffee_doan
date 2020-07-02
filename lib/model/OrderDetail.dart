@@ -31,6 +31,14 @@ class OrderDetail extends ChangeNotifier{
     return _price;
   }
 
+  double get priceNotSale{
+    double tong = 0.0;
+    for( var i = 0; i<_drinkOrderDetails.length; i++){
+      tong += _drinkOrderDetails[i].drink.price;
+    }
+    return tong;
+  }
+
   set totalPrice(double value) {
     _price = value;
   }

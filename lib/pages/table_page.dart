@@ -1,6 +1,7 @@
 import 'package:bhccoffee/model/OrderDetail.dart';
 import 'package:bhccoffee/screens/main_screen.dart';
-import 'package:bhccoffee/widget/table_cart.dart';
+import 'package:bhccoffee/widget/table_cart_new.dart';
+import 'package:bhccoffee/widget/table_cart_ordered.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:provider/provider.dart';
 
@@ -15,33 +16,43 @@ class TablePage extends StatefulWidget {
 class _TablePageState extends State<TablePage> {
 
   final List<TableShop> _table = [];
-
   @override
   initState() {
     super.initState();
-      FirebaseDatabase.instance.reference().child("table").onValue.listen((event) {
-        DataSnapshot snapshot = event.snapshot;
 
-        var KEYS = snapshot.value.keys;
-        var DATA = snapshot.value;
+    FirebaseDatabase.instance.reference().child("table").onValue.listen((event) {
+      DataSnapshot snapshot = event.snapshot;
 
-        _table.clear();
+      var KEYS = snapshot.value.keys;
+      var DATA = snapshot.value;
 
-        for (var individualKey in KEYS) {
-          TableShop table = new TableShop(
-              individualKey,
-              DATA[individualKey]['name'],
-              DATA[individualKey]['isActive']
-          );
-          _table.add(table);
-        }
+      _table.clear();
 
-//        _table.sort((a,b)=>a.name.compareTo(b.name));
+      for (var individualKey in KEYS) {
+        TableShop table = new TableShop(
+            individualKey,
+            DATA[individualKey]['name'],
+            DATA[individualKey]['isActive'],
+            DATA[individualKey]['order']
+        );
+        _table.add(table);
+      }
 
-        setState(() {
-          print('Length: $_table.length');
-        });
+      _table.sort((a,b)=>a.name.compareTo(b.name));
+
+      setState(() {
+        print('Length: $_table.length');
       });
+    });
+  }
+
+  Widget _CheckOrderInTable(TableShop table){
+    if(table.listOrder != null){
+      return TableCardOrdered(table: table);
+    }
+    else{
+      return TableCardNew(table: table);
+    }
   }
 
   @override
@@ -72,7 +83,7 @@ class _TablePageState extends State<TablePage> {
   Widget _buildTableItem(TableShop table) {
     return Container(
       margin: EdgeInsets.only(bottom: 20.0),
-      child: TableCard(table: table),
+      child: _CheckOrderInTable(table),
     );
   }
 }

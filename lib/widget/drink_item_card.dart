@@ -85,7 +85,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                                   color: Colors.blue),
                             ),
                             Text(
-                              widget._drink.sale.toString()+"%",
+                              "\$"+widget._drink.priceSale().toString(),
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                           OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
                           isHaveDrink = 1;
                           Fluttertoast.showToast(
-                              msg: "Item added to cart",
+                              msg: "Đã thêm sản phẩm vào giỏ hàng",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
@@ -124,7 +124,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                       if(isHaveDrink == 0){
                         OrderDetail.addDrink(new DrinkOrderDetail(widget._drink, 1));
                         Fluttertoast.showToast(
-                            msg: "New item added to Cart",
+                            msg: "Đã thêm sản phẩm vào giỏ hàng",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 1,
