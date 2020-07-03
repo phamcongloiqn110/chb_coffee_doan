@@ -10,17 +10,17 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-class TableCardOrdered extends StatefulWidget {
+class TableCardOrderedPending extends StatefulWidget {
 
   final TableShop table;
 
-  const TableCardOrdered({Key key, this.table}) : super(key: key);
+  const TableCardOrderedPending({Key key, this.table}) : super(key: key);
 
   @override
-  _TableCardOrderedState createState() => _TableCardOrderedState();
+  _TableCardOrderedPendingState createState() => _TableCardOrderedPendingState();
 }
 
-class _TableCardOrderedState extends State<TableCardOrdered> {
+class _TableCardOrderedPendingState extends State<TableCardOrderedPending> {
 
   final DatabaseReference Database =  FirebaseDatabase.instance.reference();
   String readTimestamp(int timestamp) {
@@ -49,6 +49,7 @@ class _TableCardOrderedState extends State<TableCardOrdered> {
 
     return time;
   }
+
   sendData(List<DrinkOrderDetail> orderDetail, TableShop table){
     var detail = [];
     var date = new DateTime.now().millisecondsSinceEpoch;
@@ -85,8 +86,8 @@ class _TableCardOrderedState extends State<TableCardOrdered> {
 
         for (var individualKey in KEYS) {
           DrinkOrderDetail drink = DrinkOrderDetail(
-              DATA[individualKey]['food'],
-              DATA[individualKey]['num']
+            DATA[individualKey]['food'],
+            DATA[individualKey]['num']
           );
           listDrinkOrderDetail.add(drink);
         }
@@ -133,7 +134,7 @@ class _TableCardOrderedState extends State<TableCardOrdered> {
                     height: 100.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(22),
-                      color: Colors.red,
+                      color: Colors.yellow,
                       boxShadow: [
                         BoxShadow(
                             blurRadius: 5.0, offset: Offset(0, 3), color: Colors.black12),
@@ -156,7 +157,7 @@ class _TableCardOrderedState extends State<TableCardOrdered> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Bàn đang sử dụng"),
+                          child: Text("Bàn đang chờ món"),
                         ),
                         SizedBox(height: 8.0,),
                         Container(

@@ -2,6 +2,7 @@ import 'package:bhccoffee/model/OrderDetail.dart';
 import 'package:bhccoffee/screens/main_screen.dart';
 import 'package:bhccoffee/widget/table_cart_new.dart';
 import 'package:bhccoffee/widget/table_cart_ordered.dart';
+import 'package:bhccoffee/widget/table_cart_ordered_pending.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,8 @@ class _TablePageState extends State<TablePage> {
             individualKey,
             DATA[individualKey]['name'],
             DATA[individualKey]['isActive'],
-            DATA[individualKey]['orders']
+            DATA[individualKey]['orders'],
+            DATA[individualKey]['status']
         );
         _table.add(table);
       }
@@ -48,6 +50,9 @@ class _TablePageState extends State<TablePage> {
 
   Widget _CheckOrderInTable(TableShop table){
     if(table.listOrder != null){
+      if(table.status != null){
+        return TableCardOrderedPending(table: table);
+      }
       return TableCardOrdered(table: table);
     }
     else{

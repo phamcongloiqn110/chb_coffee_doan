@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bhccoffee/model/DrinkOrderDetail.dart';
 import 'package:bhccoffee/model/OrderDetail.dart';
 import 'package:bhccoffee/model/Table.dart';
@@ -7,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 
@@ -24,9 +23,36 @@ class _TableCardNewState extends State<TableCardNew> {
 
   final DatabaseReference Database =  FirebaseDatabase.instance.reference();
 
+  String readTimestamp(int timestamp) {
+    var now = DateTime.now();
+    var format = DateFormat('HH:mm a');
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+    var diff = now.difference(date);
+    var time = '';
+
+    if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
+      time = format.format(date);
+    } else if (diff.inDays > 0 && diff.inDays < 7) {
+      if (diff.inDays == 1) {
+        time = diff.inDays.toString() + ' DAY AGO';
+      } else {
+        time = diff.inDays.toString() + ' DAYS AGO';
+      }
+    } else {
+      if (diff.inDays == 7) {
+        time = (diff.inDays / 7).floor().toString() + ' WEEK AGO';
+      } else {
+
+        time = (diff.inDays / 7).floor().toString() + ' WEEKS AGO';
+      }
+    }
+
+    return time;
+  }
+
   sendData(List<DrinkOrderDetail> orderDetail, TableShop table){
     var detail = [];
-    var date = DateTime.now().millisecondsSinceEpoch;
+    var date = new DateTime.now().millisecondsSinceEpoch;
     for( var i = 0 ; i < orderDetail.length ; i++){
       var vl = {
         'food' : orderDetail[i].drink.id,
@@ -39,36 +65,19 @@ class _TableCardNewState extends State<TableCardNew> {
 
     var orderKey = Database.child("orders").push().key;
     Database.child("orders").child(orderKey).set({
-      'date'  : date,
+      'date'  : readTimestamp,
       'detail': detail,
-      'staff' : null
+      'staff' : null,
+      'status': 'pending'
     });
 
-    var dbRef = Database.child("table").child(widget.table.id).child("orders");
-    DatabaseReference newChildRef = dbRef.push();
+    var dbRefTable = Database.child("table").child(widget.table.id);
+    var dbRefTableOrder = dbRefTable.child("orders");
+    DatabaseReference newChildRef = dbRefTableOrder.push();
     var key = newChildRef.key;
-    dbRef.child(key).set(orderKey);
-  }
-
-  Timer _countdownTimer;
-
-  @override
-  void initState() {
-    _countdownTimer = Timer.periodic(Duration(seconds: 2), (timer) {
-      if (mounted){
-        setState(() {
-
-        });
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _countdownTimer?.cancel();
-    _countdownTimer = null;
-    super.dispose();
+    dbRefTableOrder.child(key).set(
+        orderKey);
+    dbRefTable.child("status").set('pending');
   }
 
   @override
