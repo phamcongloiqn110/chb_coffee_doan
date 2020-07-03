@@ -77,13 +77,6 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                        Text(
-                          widget.sale.toString()+"%",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.0
-                          ),
-                        )
                       ],
                     ),
                   ),

@@ -133,9 +133,11 @@ class _OrderPageState extends State<OrderPage> {
                               Text(
                                 "Price: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
                                 style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.blueGrey,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 15.0,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationThickness: 2 ),
                               ),
                               SizedBox(height: 5.0),
                               Text(

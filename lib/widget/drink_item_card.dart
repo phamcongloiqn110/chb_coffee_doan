@@ -80,16 +80,18 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                             Text(
                               "\$"+widget._drink.price.toString(),
                               style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.red,
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationThickness: 2.85),
                             ),
                             Text(
                               "\$"+widget._drink.priceSale().toString(),
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
+                                  color: Colors.lightBlue),
                             ),
                           ],
                         ),

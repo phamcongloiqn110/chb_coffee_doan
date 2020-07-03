@@ -19,11 +19,11 @@ class DrinkDetailsSearch extends StatefulWidget {
 class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
 
   var _mediumSpace = SizedBox(
-    height: 20.0,
+    height: 10.0,
   );
 
   var _smallSpace = SizedBox(
-    height: 10.0,
+    height: 5.0,
   );
 
   int countNum = 1;
@@ -37,13 +37,13 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+              height: 1000.0,
               padding: EdgeInsets.all(5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    height: 320.0,
+                    height: 300.0,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -56,7 +56,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
-                        width: 300.0,
+                        width: 250.0,
                         child: Text(
                           widget._drink.name,
                           style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
