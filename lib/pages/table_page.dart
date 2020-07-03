@@ -33,7 +33,7 @@ class _TablePageState extends State<TablePage> {
             individualKey,
             DATA[individualKey]['name'],
             DATA[individualKey]['isActive'],
-            DATA[individualKey]['order']
+            DATA[individualKey]['orders']
         );
         _table.add(table);
       }

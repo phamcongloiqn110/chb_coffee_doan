@@ -44,7 +44,7 @@ class _TableCardNewState extends State<TableCardNew> {
       'staff' : null
     });
 
-    var dbRef = Database.child("table").child(widget.table.id).child("order");
+    var dbRef = Database.child("table").child(widget.table.id).child("orders");
     DatabaseReference newChildRef = dbRef.push();
     var key = newChildRef.key;
     dbRef.child(key).set(orderKey);
