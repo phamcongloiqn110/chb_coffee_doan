@@ -50,13 +50,16 @@ class _TablePageState extends State<TablePage> {
 
   Widget _CheckOrderInTable(TableShop table){
     if(table.listOrder != null){
-      if(table.status != null){
-        return TableCardOrderedPending(table: table);
+      if(table.isActive){
+        if(table.status != null){
+          return TableCardOrderedPending(table: table);
+        }
+        return TableCardOrdered(table: table);
       }
-      return TableCardOrdered(table: table);
     }
     else{
-      return TableCardNew(table: table);
+      if(table.isActive)
+        return TableCardNew(table: table);
     }
   }
 

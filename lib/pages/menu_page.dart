@@ -1,9 +1,10 @@
+import 'package:bhccoffee/widget/drink_item_card_notsale.dart';
 import 'package:provider/provider.dart';
 
 import '../model/Drink.dart';
 
 import '../model/OrderDetail.dart';
-import '../widget/drink_item_card.dart';
+import '../widget/drink_item_card_sale.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
@@ -48,6 +49,17 @@ class _MenuPageState extends State<MenuPage> {
     });
   }
 
+  Widget _CheckDrink(Drink drink){
+    if(drink.isSale){
+      if(drink.isActive)
+        return DrinkItemCard(drink);
+    }
+    else{
+      if(drink.isActive)
+        return DrinkItemCardNotSale(drink);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<OrderDetail> (
@@ -75,7 +87,7 @@ class _MenuPageState extends State<MenuPage> {
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 0.0),
-        child: DrinkItemCard(drink),
+        child: _CheckDrink(drink),
       ),
     );
   }

@@ -59,7 +59,7 @@ class _OrderPageState extends State<OrderPage> {
                                         }else{
                                           OrderDetail.basketDrinkOrderDetail[index].quantity++;
                                           OrderDetail.basketDrinkOrderDetail[index].priceAfterSale;
-                                          OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[index].drink.totalDrink());
+                                          OrderDetail.tongGia(OrderDetail.totalPriceAfterSale + OrderDetail.basketDrinkOrderDetail[index].drink.totalDrink());
                                         }
                                       });
                                     },
@@ -86,7 +86,7 @@ class _OrderPageState extends State<OrderPage> {
                                         }else{
                                           OrderDetail.basketDrinkOrderDetail[index].quantity--;
                                           OrderDetail.basketDrinkOrderDetail[index].priceAfterSale;
-                                          OrderDetail.tongGia(OrderDetail.totalPrice - OrderDetail.basketDrinkOrderDetail[index].drink.totalDrink());
+                                          OrderDetail.tongGia(OrderDetail.totalPriceAfterSale - OrderDetail.basketDrinkOrderDetail[index].drink.totalDrink());
                                         }
                                       });
                                     },
@@ -131,7 +131,7 @@ class _OrderPageState extends State<OrderPage> {
                               SizedBox(height: 5.0),
                               SizedBox(height: 5.0),
                               Text(
-                                "Price: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
+                                "Giá gốc: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
                                 style: TextStyle(
                                     fontSize: 15.0,
                                     color: Colors.red,
@@ -141,7 +141,7 @@ class _OrderPageState extends State<OrderPage> {
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                "Price sale: \$"+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString(),
+                                "Giá sale: \$"+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.lightBlue,
@@ -211,7 +211,7 @@ class _OrderPageState extends State<OrderPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "\$ ${OrderDetail.totalPrice}",
+                    "\$ ${OrderDetail.totalPriceAfterSale}",
                     style: TextStyle(
                         color: Colors.deepOrange,
                         fontSize: 16.0,
@@ -240,7 +240,7 @@ class _OrderPageState extends State<OrderPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "\$ ${OrderDetail.totalPrice}",
+                    "\$ ${OrderDetail.totalPriceAfterSale}",
                     style: TextStyle(
                         color: Colors.green,
                         fontSize: 20.0,

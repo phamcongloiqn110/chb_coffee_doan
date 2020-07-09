@@ -75,7 +75,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      "Description:",
+                      "Mô tả:",
                       style: TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -95,7 +95,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                               if(countNum<2){
                                 countNum = 1;
                                 Fluttertoast.showToast(
-                                    msg: "Invalid order quantity",
+                                    msg: "Số lượng đặt không nhỏ hơn 1",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 1,
@@ -118,7 +118,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                               if(countNum>98){
                                 countNum = 99;
                                 Fluttertoast.showToast(
-                                    msg: "Invalid order quantity",
+                                    msg: "Số lượng đặt không lớn hơn 99",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 1,
@@ -146,7 +146,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                           constraints: const BoxConstraints(minWidth: 88.0, minHeight: 45.0), // min sizes for Material buttons
                           alignment: Alignment.center,
                           child: const Text(
-                            'Add to cart',
+                            'Thêm vào giỏ hàng',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18.0,
@@ -161,10 +161,10 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                           if(OrderDetail.basketDrinkOrderDetail[i].drink.id == widget._drink.id){
                             OrderDetail.basketDrinkOrderDetail[i].quantity += int.parse('$countNum');
                             OrderDetail.basketDrinkOrderDetail[i].priceAfterSale;
-                            OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
+                            OrderDetail.tongGia(OrderDetail.totalPriceAfterSale + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
                             isHaveDrink = 1;
                             Fluttertoast.showToast(
-                                msg: "Item added to cart",
+                                msg: "Đã thêm sản phẩm vào giỏ hàng",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
@@ -178,7 +178,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                         if(isHaveDrink == 0){
                           OrderDetail.addDrink(new DrinkOrderDetail(widget._drink, int.parse('$countNum')));
                           Fluttertoast.showToast(
-                              msg: "New item added to Cart",
+                              msg: "Đã thêm sản phẩm vào giỏ hàng",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,

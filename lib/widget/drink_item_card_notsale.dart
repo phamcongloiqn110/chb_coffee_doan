@@ -6,17 +6,17 @@ import 'package:provider/provider.dart';
 import '../model/Drink.dart';
 import '../model/OrderDetail.dart';
 
-class DrinkItemCard extends StatefulWidget {
+class DrinkItemCardNotSale extends StatefulWidget {
 
   final Drink _drink;
 
-  DrinkItemCard(this._drink);
+  DrinkItemCardNotSale(this._drink);
 
   @override
-  _DrinkItemCardState createState() => _DrinkItemCardState();
+  _DrinkItemCardNotSaleState createState() => _DrinkItemCardNotSaleState();
 }
 
-class _DrinkItemCardState extends State<DrinkItemCard> {
+class _DrinkItemCardNotSaleState extends State<DrinkItemCardNotSale> {
   @override
   Widget build(BuildContext context) {
     return Consumer<OrderDetail>(
@@ -50,7 +50,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0, top: 5.0),
+                  padding: EdgeInsets.only(left: 10.0, top: 15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -74,26 +74,12 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                       ),
                       Container(
                         width: 190.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "\$"+widget._drink.price.toString(),
-                              style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.red,
-                                  decoration: TextDecoration.lineThrough,
-                                  decorationThickness: 2.85),
-                            ),
-                            Text(
-                              "\$"+widget._drink.priceSale().toString(),
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.lightBlue),
-                            ),
-                          ],
+                        child: Text(
+                          "\$"+widget._drink.price.toString(),
+                          style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.lightBlue),
                         ),
                       ),
                     ],
@@ -109,7 +95,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                         if(OrderDetail.basketDrinkOrderDetail[i].drink.id == widget._drink.id){
                           OrderDetail.basketDrinkOrderDetail[i].quantity += 1;
                           OrderDetail.basketDrinkOrderDetail[i].priceAfterSale;
-                          OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
+                          OrderDetail.tongGia(OrderDetail.totalPriceAfterSale + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
                           isHaveDrink = 1;
                           Fluttertoast.showToast(
                               msg: "Đã thêm sản phẩm vào giỏ hàng",

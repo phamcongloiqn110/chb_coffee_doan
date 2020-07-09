@@ -27,7 +27,7 @@ class OrderDetail extends ChangeNotifier{
     _drinkOrderDetails.length = value;
   }
 
-  double get totalPrice {
+  double get totalPriceAfterSale {
     return _price;
   }
 

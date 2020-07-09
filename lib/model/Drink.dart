@@ -73,38 +73,4 @@ class Drink{
     else
       return price;
   }
-//  Drink.map(dynamic obj){
-//    this._id = obj['id'];
-//    this._name = obj['name'];
-//    this._description = obj['description'];
-//    this._image = obj['image'];
-//    this._isActive = obj['isActive'];
-//    this._isSale = obj['isSale'];
-//    this._price = obj['price'];
-//    this._sale = obj['sale'];
-//  }
-//
-//  Map<String, dynamic> toMap() {
-//    var map = new Map<String, dynamic>();
-//    if (_id != null) {
-//      map['id'] = _id;
-//    }
-//    map['image'] = _image;
-//    map['name'] = _name;
-//    map['description'] = _description;
-//    map['price'] = _price;
-//    map['sale'] = _sale;
-//
-//    return map;
-//  }
-//
-//  Drink.fromMap(Map<String, dynamic> map) {
-//    this._id = map['id'];
-//    this.name = map ['name'];
-//    this.image = map['image'];
-//    this._description = map['description'];
-//    this._price = map['price'];
-//    this._sale = map['sale'];
-//  }
-
 }

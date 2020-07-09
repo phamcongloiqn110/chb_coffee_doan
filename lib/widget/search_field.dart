@@ -39,14 +39,18 @@ class _SearchFieldState extends State<SearchField> {
             DATA[individualKey]['isSale'],
             double.parse(DATA[individualKey]['price']),
             int.parse(DATA[individualKey]['sale']));
-        nameDrinks.add(drink.name);
         _drink.add(drink);
+        if(drink.isActive){
+          nameDrinks.add(drink.name);
+        }
       }
       setState(() {
         print('Length: $_drink.length');
       });
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,7 @@ class _SearchFieldState extends State<SearchField> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 contentPadding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
-                hintText: "Search any drink", hintStyle: TextStyle(color: Colors.grey),
+                hintText: "Tìm kiếm thức uống", hintStyle: TextStyle(color: Colors.grey),
                 suffixIcon: Material(
                   color: Color.fromRGBO(0,0,0,0),
                   borderRadius: BorderRadius.circular(30.0),
@@ -99,6 +103,7 @@ class DataSearch extends SearchDelegate<String>{
   List<dynamic> list;
   List<String> nameDrinks;
   DataSearch({this.list, this.nameDrinks});
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -153,6 +158,5 @@ class DataSearch extends SearchDelegate<String>{
          );
       });
   }
-
 }
 

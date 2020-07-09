@@ -46,6 +46,29 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Widget _CheckDrink(Drink drink){
+    if(drink.isSale){
+      if(drink.isActive)
+        return BoughtDrinks(
+            image: drink.image,
+            name: drink.name,
+            description: drink.description,
+            price: drink.price,
+            sale: drink.sale
+        );
+    }
+    else{
+      if(drink.isActive)
+        return BoughtDrinks(
+            image: drink.image,
+            name: drink.name,
+            description: drink.description,
+            price: drink.price,
+            sale: drink.sale
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Frequently Bought Drinks",
+                "Danh sách thức uống",
                 style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold
@@ -86,13 +109,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 20.0),
-        child: BoughtDrinks(
-            image: drink.image,
-            name: drink.name,
-            description: drink.description,
-            price: drink.price,
-            sale: drink.sale
-        ),
+        child: _CheckDrink(drink),
 
       ),
     );

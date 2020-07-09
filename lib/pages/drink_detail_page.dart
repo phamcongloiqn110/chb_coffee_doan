@@ -1,5 +1,5 @@
-import 'package:bhccoffee/model/Drink.dart';
-import 'package:bhccoffee/model/DrinkOrderDetail.dart';
+import '../model/Drink.dart';
+import '../model/DrinkOrderDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
             appBar: AppBar(
               elevation: 0.0,
               title: Text(
-                "Food Details",
+                "Chi tiết sản phẩm",
                 style: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
               backgroundColor: Colors.white,
@@ -75,7 +75,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                   ),
                   _mediumSpace,
                   Text(
-                    "Description:",
+                    "Mô tả:",
                     style: TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   _smallSpace,
@@ -93,6 +93,15 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                             setState(() {
                               if(countNum<2){
                                 countNum = 1;
+                                Fluttertoast.showToast(
+                                    msg: "Số lượng đặt không nhỏ hơn 1",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
                               }else{
                                 countNum--;
                               }
@@ -107,6 +116,15 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                             setState(() {
                               if(countNum>98){
                                 countNum = 99;
+                                Fluttertoast.showToast(
+                                    msg: "Số lượng đặt không lớn hơn 99",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
                               }else{
                                 countNum++;
                               }
@@ -127,7 +145,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                           constraints: const BoxConstraints(minWidth: 88.0, minHeight: 45.0), // min sizes for Material buttons
                           alignment: Alignment.center,
                           child: const Text(
-                            'Add to cart',
+                            'Thêm vào giỏ hàng',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18.0,
@@ -142,10 +160,10 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                           if(OrderDetail.basketDrinkOrderDetail[i].drink.id == widget._drink.id){
                             OrderDetail.basketDrinkOrderDetail[i].quantity += int.parse('$countNum');
                             OrderDetail.basketDrinkOrderDetail[i].priceAfterSale;
-                            OrderDetail.tongGia(OrderDetail.totalPrice + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
+                            OrderDetail.tongGia(OrderDetail.totalPriceAfterSale + OrderDetail.basketDrinkOrderDetail[i].drink.totalDrink());
                             isHaveDrink = 1;
                             Fluttertoast.showToast(
-                                msg: "Item added to cart",
+                                msg: "Đã thêm sản phẩm vào giỏ hàng",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIosWeb: 1,
@@ -159,7 +177,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                         if(isHaveDrink == 0){
                           OrderDetail.addDrink(new DrinkOrderDetail(widget._drink, int.parse('$countNum')));
                           Fluttertoast.showToast(
-                              msg: "New item added to Cart",
+                              msg: "Đã thêm sản phẩm vào giỏ hàng",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,

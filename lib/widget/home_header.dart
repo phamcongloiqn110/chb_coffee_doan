@@ -15,7 +15,9 @@ class HomeHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("Welcome to ", style: textStyle),
+              Text("Chào mừng đến với ", style: TextStyle(
+                fontSize: 25.0
+              )),
               Text("CHB Coffee", style: textStyle),
             ],
           ),

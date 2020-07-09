@@ -43,10 +43,10 @@ class _MainScreenState extends State<MainScreen> {
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           currentTab == 0
-              ? "CHB Coffee App"
+              ? "Trang chủ"
               : currentTab == 1
-              ? "All Drink Items"
-              : currentTab == 2 ? "Order" : "Table",
+              ? "Menu"
+              : currentTab == 2 ? "Giỏ hàng" : "Bàn",
           style: TextStyle(
               color: Colors.black,
               fontSize: 18.0,
@@ -67,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text("Home")
+            title: Text("Trang chủ")
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.book),
@@ -75,11 +75,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
-              title: Text("Order")
+              title: Text("Giỏ hàng")
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.table_chart),
-              title: Text("Table")
+              title: Text("Bàn")
           )
         ]
       ),

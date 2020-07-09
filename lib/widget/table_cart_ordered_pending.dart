@@ -105,7 +105,7 @@ class _TableCardOrderedPendingState extends State<TableCardOrderedPending> {
                     height: 100.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(22),
-                      color: Colors.yellow,
+                      color: Colors.orange,
                       boxShadow: [
                         BoxShadow(
                             blurRadius: 5.0, offset: Offset(0, 3), color: Colors.black12),

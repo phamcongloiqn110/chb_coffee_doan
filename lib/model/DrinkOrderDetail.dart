@@ -11,10 +11,10 @@ class DrinkOrderDetail {
 
   double get priceAfterSale {
     if(_drink.isSale){
-      _priceAfterSale = (_drink.price *_quantity * _drink.sale)/100;
+      _priceAfterSale = (_drink.price * 1 * _drink.sale)/100;
     }
     else
-      _priceAfterSale = _drink.price * _quantity;
+      _priceAfterSale = _drink.price * 1;
     return _priceAfterSale;
   }
 
