@@ -36,7 +36,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
               elevation: 0.0,
               title: Text(
                 "Chi tiết sản phẩm",
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
+                style: TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold),
               ),
               backgroundColor: Colors.white,
               iconTheme: IconThemeData(color: Colors.black),

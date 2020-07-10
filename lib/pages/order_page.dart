@@ -303,7 +303,7 @@ class _OrderPageState extends State<OrderPage> {
                   }
               }),
           bottomNavigationBar: Container(
-            height: 220.0,
+            height: 155.0,
             padding: EdgeInsets.only(
                 left: 10.0,
                 right: 10.0,
@@ -311,52 +311,6 @@ class _OrderPageState extends State<OrderPage> {
             ),
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Giá sản phẩm",
-                      style: TextStyle(
-                          color: Color(0xFF9BA7C6),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "\$ ${OrderDetail.priceNotSale}",
-                      style: TextStyle(
-                          color: Color(0xFF9BA7C6),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Giá sau khi giảm",
-                      style: TextStyle(
-                          color: Color(0xFF9BA7C6),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "\$ ${OrderDetail.totalPriceAfterSale}",
-                      style: TextStyle(
-                          color: Colors.deepOrange,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
                 Divider(
                   height: 3.0,
                 ),
@@ -368,7 +322,7 @@ class _OrderPageState extends State<OrderPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      "Thành tiền",
+                      "Tổng tiền",
                       style: TextStyle(
                           color: Color(0xFF9BA7C6),
                           fontSize: 16.0,
