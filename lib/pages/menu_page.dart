@@ -1,4 +1,4 @@
-import 'package:bhccoffee/widget/drink_item_card_notsale.dart';
+import '../widget/drink_item_card_notsale.dart';
 import 'package:provider/provider.dart';
 
 import '../model/Drink.dart';
