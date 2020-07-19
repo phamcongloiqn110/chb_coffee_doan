@@ -63,7 +63,7 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                         ),
                       ),
                       Text(
-                        "\$" + widget._drink.price.toString(),
+                        widget._drink.price.toString()+" VND",
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Theme.of(context).primaryColor,

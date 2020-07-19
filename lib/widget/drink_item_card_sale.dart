@@ -78,7 +78,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "\$"+widget._drink.price.toString(),
+                              widget._drink.price.toString()+" VND",
                               style: TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w700,
@@ -87,7 +87,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                                   decorationThickness: 2.85),
                             ),
                             Text(
-                              "\$"+widget._drink.priceSale().toString(),
+                              widget._drink.priceSale().toString()+" VND",
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,

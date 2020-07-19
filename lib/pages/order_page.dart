@@ -142,7 +142,7 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Giá sale: \$"+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString(),
+                                  "Giá sale: "+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString()+" VND",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.lightBlue,
@@ -275,7 +275,7 @@ class _OrderPageState extends State<OrderPage> {
                                 SizedBox(height: 5.0),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Giá: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
+                                  "Giá: "+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString()+" VND",
                                   style: TextStyle(
                                       fontSize: 15.0,
                                       color: Colors.lightBlue,
@@ -329,7 +329,7 @@ class _OrderPageState extends State<OrderPage> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "\$ ${OrderDetail.totalPriceAfterSale}",
+                       "${OrderDetail.totalPriceAfterSale} VND",
                       style: TextStyle(
                           color: Colors.green,
                           fontSize: 20.0,

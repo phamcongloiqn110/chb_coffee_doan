@@ -65,7 +65,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                         style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "\$" + widget._drink.price.toString(),
+                        widget._drink.price.toString()+" VND",
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Theme.of(context).primaryColor,

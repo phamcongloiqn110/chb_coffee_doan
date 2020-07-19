@@ -70,7 +70,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          "\$"+widget.price.toString(),
+                          widget.price.toString()+" VND",
                           style: TextStyle(
                             color: Colors.orange,
                             fontSize: 15.0,

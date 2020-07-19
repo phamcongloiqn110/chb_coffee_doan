@@ -75,7 +75,7 @@ class _DrinkItemCardNotSaleState extends State<DrinkItemCardNotSale> {
                       Container(
                         width: 190.0,
                         child: Text(
-                          "\$"+widget._drink.price.toString(),
+                          widget._drink.price.toString()+" VND",
                           style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w700,
