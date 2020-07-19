@@ -57,7 +57,7 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Text(
                           widget._drink.name,
                           style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
@@ -68,14 +68,14 @@ class _DrinkItemCardState extends State<DrinkItemCard> {
                         height: 5.0,
                       ),
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Text(widget._drink.description),
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

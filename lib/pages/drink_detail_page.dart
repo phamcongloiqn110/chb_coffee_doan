@@ -88,53 +88,56 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                     textAlign: TextAlign.justify,
                   ),
                   _smallSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(icon: Icon(
-                          Icons.remove_circle),
-                          onPressed: (){
-                            setState(() {
-                              if(countNum<2){
-                                countNum = 1;
-                                Fluttertoast.showToast(
-                                    msg: "Số lượng đặt không nhỏ hơn 1",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.grey,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );
-                              }else{
-                                countNum--;
-                              }
-                            });
-                          }),
-                      SizedBox(width: 15.0,),
-                      Text('$countNum', style: TextStyle(fontSize: 16.0,),),
-                      SizedBox(width: 15.0,),
-                      IconButton(icon: Icon(
-                          Icons.add_circle),
-                          onPressed: (){
-                            setState(() {
-                              if(countNum>98){
-                                countNum = 99;
-                                Fluttertoast.showToast(
-                                    msg: "Số lượng đặt không lớn hơn 99",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.grey,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0
-                                );
-                              }else{
-                                countNum++;
-                              }
-                            });
-                          }),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(icon: Icon(
+                            Icons.remove_circle),
+                            onPressed: (){
+                              setState(() {
+                                if(countNum<2){
+                                  countNum = 1;
+                                  Fluttertoast.showToast(
+                                      msg: "Số lượng đặt không nhỏ hơn 1",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0
+                                  );
+                                }else{
+                                  countNum--;
+                                }
+                              });
+                            }),
+                        SizedBox(width: 15.0,),
+                        Text('$countNum', style: TextStyle(fontSize: 16.0,),),
+                        SizedBox(width: 15.0,),
+                        IconButton(icon: Icon(
+                            Icons.add_circle),
+                            onPressed: (){
+                              setState(() {
+                                if(countNum>98){
+                                  countNum = 99;
+                                  Fluttertoast.showToast(
+                                      msg: "Số lượng đặt không lớn hơn 99",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0
+                                  );
+                                }else{
+                                  countNum++;
+                                }
+                              });
+                            }),
+                      ],
+                    ),
                   ),
                   _smallSpace,
                   Center(

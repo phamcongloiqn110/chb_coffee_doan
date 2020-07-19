@@ -57,7 +57,7 @@ class _DrinkItemCardNotSaleState extends State<DrinkItemCardNotSale> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Text(
                           widget._drink.name,
                           style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
@@ -68,14 +68,14 @@ class _DrinkItemCardNotSaleState extends State<DrinkItemCardNotSale> {
                         height: 5.0,
                       ),
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Text(widget._drink.description),
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Container(
-                        width: 190.0,
+                        width: 170.0,
                         child: Text(
                           (FlutterMoneyFormatter(amount: widget._drink.price)
                               .fastCalc(type: FastCalcType.addition, amount: 1.111)

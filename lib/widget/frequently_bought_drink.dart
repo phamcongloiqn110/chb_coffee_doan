@@ -54,7 +54,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                   Column(
                     children: <Widget>[
                       Container(
-                        width: 230.0,
+                        width: 200.0,
                         child: Text(
                           widget.name,
                           style: TextStyle(
