@@ -1,3 +1,4 @@
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
@@ -132,7 +133,9 @@ class _OrderPageState extends State<OrderPage> {
                                 SizedBox(height: 5.0),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Giá gốc: \$"+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString() ,
+                                  "Giá gốc: "+ (FlutterMoneyFormatter(amount: OrderDetail.basketDrinkOrderDetail[index].drink.price)
+                                      .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                                      .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                                   style: TextStyle(
                                       fontSize: 15.0,
                                       color: Colors.red,
@@ -142,7 +145,9 @@ class _OrderPageState extends State<OrderPage> {
                                 ),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Giá sale: "+ OrderDetail.basketDrinkOrderDetail[index].priceAfterSale.toString()+" VND",
+                                  "Giá sale: "+ (FlutterMoneyFormatter(amount: OrderDetail.basketDrinkOrderDetail[index].priceAfterSale)
+                                      .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                                      .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.lightBlue,
@@ -158,8 +163,9 @@ class _OrderPageState extends State<OrderPage> {
                                   OrderDetail.removeDrink(OrderDetail.basketDrinkOrderDetail[index]);
                                 },
                                 child: Icon(
-                                  Icons.cancel,
+                                  Icons.delete_forever,
                                   color: Colors.red,
+                                  size: 30.0,
                                 ),
                               ),
                             ),
@@ -275,7 +281,9 @@ class _OrderPageState extends State<OrderPage> {
                                 SizedBox(height: 5.0),
                                 SizedBox(height: 5.0),
                                 Text(
-                                  "Giá: "+ OrderDetail.basketDrinkOrderDetail[index].drink.price.toString()+" VND",
+                                  "Giá: "+ (FlutterMoneyFormatter(amount: OrderDetail.basketDrinkOrderDetail[index].drink.price)
+                                      .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                                      .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                                   style: TextStyle(
                                       fontSize: 15.0,
                                       color: Colors.lightBlue,
@@ -291,8 +299,9 @@ class _OrderPageState extends State<OrderPage> {
                                   OrderDetail.removeDrink(OrderDetail.basketDrinkOrderDetail[index]);
                                 },
                                 child: Icon(
-                                  Icons.cancel,
+                                  Icons.delete_forever,
                                   color: Colors.red,
+                                  size: 30.0,
                                 ),
                               ),
                             ),
@@ -329,7 +338,9 @@ class _OrderPageState extends State<OrderPage> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                       "${OrderDetail.totalPriceAfterSale} VND",
+                      (FlutterMoneyFormatter(amount: OrderDetail.totalPriceAfterSale)
+                          .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                          .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                       style: TextStyle(
                           color: Colors.green,
                           fontSize: 20.0,

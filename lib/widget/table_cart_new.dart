@@ -103,7 +103,10 @@ class _TableCardNewState extends State<TableCardNew> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Bàn trống"),
+                          child: Text("Bàn trống", style: TextStyle(
+                              color: Colors.grey,
+                            fontSize: 16.0
+                          ),),
                         ),
                         SizedBox(height: 8.0,),
                         Container(

@@ -128,7 +128,10 @@ class _TableCardOrderedState extends State<TableCardOrdered> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Bàn đã lên món"),
+                          child: Text("Đã lên món", style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16.0
+                          ),),
                         ),
                         SizedBox(height: 8.0,),
                         Container(

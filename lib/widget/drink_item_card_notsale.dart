@@ -1,3 +1,5 @@
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
+
 import '../model/DrinkOrderDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -75,7 +77,9 @@ class _DrinkItemCardNotSaleState extends State<DrinkItemCardNotSale> {
                       Container(
                         width: 190.0,
                         child: Text(
-                          widget._drink.price.toString()+" VND",
+                          (FlutterMoneyFormatter(amount: widget._drink.price)
+                              .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                              .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                           style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w700,

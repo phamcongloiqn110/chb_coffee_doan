@@ -128,7 +128,10 @@ class _TableCardOrderedPendingState extends State<TableCardOrderedPending> {
                             alignment: Alignment.topLeft
                         ),
                         Container(
-                          child: Text("Bàn đang chờ món"),
+                          child: Text("Chờ lên món", style: TextStyle(
+                            color: Colors.grey,
+                              fontSize: 16.0
+                          ),),
                         ),
                         SizedBox(height: 8.0,),
                         Container(

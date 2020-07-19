@@ -1,3 +1,5 @@
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
+
 import '../model/Drink.dart';
 import '../model/DrinkOrderDetail.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +65,9 @@ class _DrinkDetailsSearchState extends State<DrinkDetailsSearch> {
                         ),
                       ),
                       Text(
-                        widget._drink.price.toString()+" VND",
+                        (FlutterMoneyFormatter(amount: widget._drink.price)
+                            .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                            .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Theme.of(context).primaryColor,
