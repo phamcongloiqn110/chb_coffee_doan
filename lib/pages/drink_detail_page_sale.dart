@@ -7,17 +7,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../model/OrderDetail.dart';
 
-class DrinkDetailsPage extends StatefulWidget {
+class DrinkDetailsPageSale extends StatefulWidget {
 
   final Drink _drink;
 
-  DrinkDetailsPage(this._drink);
+  DrinkDetailsPageSale(this._drink);
 
   @override
-  _DrinkDetailsPageState createState() => _DrinkDetailsPageState();
+  _DrinkDetailsPageSaleState createState() => _DrinkDetailsPageSaleState();
 }
 
-class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
+class _DrinkDetailsPageSaleState extends State<DrinkDetailsPageSale> {
 
   var _mediumSpace = SizedBox(
     height: 20.0,
@@ -32,8 +32,8 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<OrderDetail>(
-      builder: (context, OrderDetail, child){
-        return Scaffold(
+        builder: (context, OrderDetail, child){
+          return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
               title: Text(
@@ -66,14 +66,29 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                         widget._drink.name,
                         style: TextStyle(fontSize: 18.0, color: Colors.black,fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        (FlutterMoneyFormatter(amount: widget._drink.price)
-                            .fastCalc(type: FastCalcType.addition, amount: 1.111)
-                            .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            (FlutterMoneyFormatter(amount: widget._drink.price)
+                                .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                                .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.red,
+                                decoration: TextDecoration.lineThrough,
+                                decorationThickness: 2.85),
+                          ),
+                          Text(
+                            (FlutterMoneyFormatter(amount: widget._drink.priceSale())
+                                .fastCalc(type: FastCalcType.addition, amount: 1.111)
+                                .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.lightBlue),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -152,8 +167,8 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                             'Thêm vào giỏ hàng',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold
                             ),
                           ),
                         ),
@@ -196,8 +211,8 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                 ],
               ),
             ),
-        );
-      }
+          );
+        }
     );
   }
 }

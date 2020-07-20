@@ -1,3 +1,5 @@
+import 'package:bhccoffee/widget/frequently_bought_drink_sale.dart';
+
 import '../model/Drink.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -8,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widget/home_header.dart';
 import 'drink_detail_page.dart';
+import 'drink_detail_page_sale.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -49,23 +52,22 @@ class _HomePageState extends State<HomePage> {
   Widget _CheckDrink(Drink drink){
     if(drink.isSale){
       if(drink.isActive)
-        return BoughtDrinks(
-            image: drink.image,
-            name: drink.name,
-            description: drink.description,
-            price: drink.price,
-            sale: drink.sale
-        );
+        return BoughtDrinksSale(drink);
     }
     else{
       if(drink.isActive)
-        return BoughtDrinks(
-            image: drink.image,
-            name: drink.name,
-            description: drink.description,
-            price: drink.price,
-            sale: drink.sale
-        );
+        return BoughtDrinks(drink);
+    }
+  }
+
+  Widget _CheckDrinkSale(Drink drink){
+    if(drink.isSale){
+      if(drink.isActive)
+        return DrinkDetailsPageSale(drink);
+    }
+    else{
+      if(drink.isActive)
+        return DrinkDetailsPage(drink);
     }
   }
 
@@ -104,7 +106,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => DrinkDetailsPage(drink),
+          builder: (BuildContext context) => _CheckDrinkSale(drink),
         ));
       },
       child: Container(

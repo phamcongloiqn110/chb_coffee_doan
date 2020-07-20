@@ -1,3 +1,5 @@
+import 'package:bhccoffee/pages/drink_detail_search_sale.dart';
+
 import '../model/Drink.dart';
 import '../pages/drink_detail_search.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -49,8 +51,6 @@ class _SearchFieldState extends State<SearchField> {
       });
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +104,17 @@ class DataSearch extends SearchDelegate<String>{
   List<String> nameDrinks;
   DataSearch({this.list, this.nameDrinks});
 
+  Widget _CheckDrinkSale(Drink drink){
+    if(drink.isSale){
+      if(drink.isActive)
+        return DrinkDetailsSearchSale(drink);
+    }
+    else{
+      if(drink.isActive)
+        return DrinkDetailsSearch(drink);
+    }
+  }
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -135,7 +146,7 @@ class DataSearch extends SearchDelegate<String>{
   var result;
   for(var i = 0; i<list.length; i++){
     if(list[i].name == query){
-      result = DrinkDetailsSearch(list[i]);
+      result = _CheckDrinkSale(list[i]);
     }
   }
   return result;

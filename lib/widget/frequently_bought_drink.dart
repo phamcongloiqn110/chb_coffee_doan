@@ -1,15 +1,12 @@
+import 'package:bhccoffee/model/Drink.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class BoughtDrinks extends StatefulWidget {
 
-  final String image;
-  final String name;
-  final double price;
-  final int sale;
-  final String description;
+  final Drink _drink;
 
-  BoughtDrinks({this.image, this.name, this.price, this.sale, this.description});
+  BoughtDrinks(this._drink);
 
   @override
   _BoughtDrinksState createState() => _BoughtDrinksState();
@@ -25,7 +22,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
             Container(
               height: 275.0,
               width: MediaQuery.of(context).size.width,
-              child: Image.network(widget.image, fit: BoxFit.cover),
+              child: Image.network(widget._drink.image, fit: BoxFit.cover),
             ),
             Positioned(
               left: 0.0,
@@ -56,7 +53,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                       Container(
                         width: 200.0,
                         child: Text(
-                          widget.name,
+                          widget._drink.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 18.0,
@@ -71,7 +68,7 @@ class _BoughtDrinksState extends State<BoughtDrinks> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          (FlutterMoneyFormatter(amount: widget.price)
+                          (FlutterMoneyFormatter(amount: widget._drink.price)
                               .fastCalc(type: FastCalcType.addition, amount: 1.111)
                               .fastCalc(type: FastCalcType.substraction, amount: 2.222)).output.withoutFractionDigits +" VND",
                           style: TextStyle(

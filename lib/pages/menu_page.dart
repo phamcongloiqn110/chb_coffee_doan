@@ -1,3 +1,5 @@
+import 'package:bhccoffee/pages/drink_detail_page_sale.dart';
+
 import '../widget/drink_item_card_notsale.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +62,17 @@ class _MenuPageState extends State<MenuPage> {
     }
   }
 
+  Widget _CheckDrinkSale(Drink drink){
+    if(drink.isSale){
+      if(drink.isActive)
+        return DrinkDetailsPageSale(drink);
+    }
+    else{
+      if(drink.isActive)
+        return DrinkDetailsPage(drink);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<OrderDetail> (
@@ -82,7 +95,7 @@ class _MenuPageState extends State<MenuPage> {
     return GestureDetector(
       onTap: (){
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => DrinkDetailsPage(drink),
+          builder: (BuildContext context) => _CheckDrinkSale(drink),
         ));
       },
       child: Container(
